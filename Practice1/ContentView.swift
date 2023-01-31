@@ -1,21 +1,36 @@
-//
-//  ContentView.swift
-//  Practice1
-//
-//  Created by 渡邊魁優 on 2023/01/31.
-//
 
 import SwiftUI
 
 struct ContentView: View {
+    @State var number = 0
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Spacer()
+            Text("\(number)")
+                .font(.largeTitle)
+            Spacer()
+            HStack {
+                Spacer()
+                CustomButton(number: $number, amountChenge: "-1")
+                Spacer()
+                CustomButton(number: $number, amountChenge: "+1")
+                Spacer()
+            }
+            Spacer()
         }
-        .padding()
+    }
+}
+
+struct CustomButton: View {
+    @Binding var number: Int
+    let amountChenge: String
+    var body: some View {
+        Button(action: {
+            number += Int(amountChenge) ?? 0
+        }) {
+            Text("\(amountChenge)")
+                .font(.largeTitle)
+        }
     }
 }
 
